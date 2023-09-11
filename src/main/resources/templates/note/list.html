@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список нотаток</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Список нотаток</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Виводимо список нотаток з моделі -->
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.title}">Title</td>
+        <td th:text="${note.content}">Content</td>
+        <td>
+            <!-- Посилання на сторінку редагування з параметром ID -->
+            <a th:href="@{'/note/edit?id=' + ${note.id}}" class="btn btn-primary">Редагувати</a>
+            <!-- Форма для видалення нотатки -->
+            <form th:action="@{/note/delete}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${note.id}">
+                <button type="submit" class="btn btn-danger">Видалити</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
