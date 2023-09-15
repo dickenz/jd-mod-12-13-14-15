@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/note")
@@ -23,13 +23,13 @@ public class NoteController {
     }
 
     @PostMapping("/delete")
-    public String deleteNote(@RequestParam UUID id) {
+    public String deleteNote(@RequestParam Long id) {
         noteService.deleteById(id);
         return "redirect:/note/list";
     }
 
     @GetMapping("/edit")
-    public String editNote(@RequestParam UUID id, Model model) {
+    public String editNote(@RequestParam Long id, Model model) {
         Note note = noteService.getById(id);
         model.addAttribute("note", note);
         return "note/edit";
@@ -40,6 +40,12 @@ public class NoteController {
         System.out.println("Before Update: " + note);
         noteService.update(note);
         System.out.println("After Update: " + note);
+        return "redirect:/note/list";
+    }
+
+    @GetMapping("/initialize")
+    public String initializeNotes() {
+        noteService.initializeNotes();
         return "redirect:/note/list";
     }
 
