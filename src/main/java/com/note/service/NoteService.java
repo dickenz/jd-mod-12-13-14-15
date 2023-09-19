@@ -18,18 +18,6 @@ public class NoteService {
         this.noteRepository = noteRepository;
     }
 
-    public void initializeNotes() {
-        Note note1 = new Note();
-        note1.setTitle("Sample Note 1");
-        note1.setContent("This is the content of note 1.");
-        noteRepository.save(note1);
-
-        Note note2 = new Note();
-        note2.setTitle("Sample Note 2");
-        note2.setContent("This is the content of note 2.");
-        noteRepository.save(note2);
-    }
-
     public List<Note> listAll() {
         return noteRepository.findAll();
     }
