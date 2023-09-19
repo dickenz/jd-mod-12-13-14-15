@@ -43,10 +43,4 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
-    @GetMapping("/initialize")
-    public String initializeNotes() {
-        noteService.initializeNotes();
-        return "redirect:/note/list";
-    }
-
 }
